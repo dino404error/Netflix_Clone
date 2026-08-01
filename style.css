@@ -1,0 +1,248 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#141414;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    z-index:1000;
+    background:linear-gradient(to bottom,
+    rgba(0,0,0,.9),
+    rgba(0,0,0,.4),
+    transparent);
+    transition:.4s;
+}
+
+nav{
+    height:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 60px;
+}
+
+.logo img{
+    width:140px;
+    cursor:pointer;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav ul li{
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+nav ul li:hover{
+    color:#b3b3b3;
+}
+
+.right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.right i{
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.right i:hover{
+    transform:scale(1.1);
+}
+
+.right img{
+    width:34px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+
+.hero{
+    height:100vh;
+
+    background:
+    linear-gradient(to top,
+    rgba(20,20,20,1),
+    rgba(20,20,20,.2)),
+    url(images/hero.jpg);
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    align-items:center;
+
+    padding-left:70px;
+}
+
+.overlay{
+    width:45%;
+}
+
+.overlay h1{
+
+    font-size:68px;
+
+    margin-bottom:18px;
+
+    font-weight:700;
+
+}
+
+.overlay p{
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    margin-bottom:35px;
+
+    color:#f5f5f5;
+
+}
+
+.buttons{
+
+    display:flex;
+
+    gap:18px;
+
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.play{
+
+    background:white;
+
+    color:black;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:5px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.play:hover{
+
+    background:#ddd;
+
+}
+
+.info{
+
+    background:rgba(109,109,110,.7);
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:5px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.info:hover{
+
+    background:rgba(109,109,110,.4);
+
+}
+
+/* ===========================
+   MOVIE ROWS
+=========================== */
+
+.movies{
+
+    padding:30px 60px;
+
+}
+
+.movies h2{
+
+    margin-bottom:18px;
+
+    font-size:26px;
+
+}
+
+.row{
+
+    display:flex;
+
+    gap:14px;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    scrollbar-width:none;
+
+}
+
+.row::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.row img{
+
+    width:240px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
