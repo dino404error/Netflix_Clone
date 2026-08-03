@@ -15,6 +15,7 @@ app.use(express.json());
 
 
 app.use("/api/auth", require("./routes/authRoutes.js"));
+app.use("/api/favorites", require("./routes/favoriteRoutes"));
 app.use("/api/movies", require("./routes/movieRoutes.js"));
 
 
