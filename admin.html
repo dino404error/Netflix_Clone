@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Netflix Admin</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Add Movie</h1>
+
+        <form id="movieForm">
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Movie Title"
+                required>
+
+            <textarea
+                id="description"
+                placeholder="Movie Description"
+                required>
+            </textarea>
+
+            <input
+                type="text"
+                id="image"
+                placeholder="Image URL"
+                required>
+
+            <input
+                type="text"
+                id="category"
+                placeholder="Category"
+                required>
+<label>Trailer URL</label>
+
+<input
+type="text"
+id="trailer"
+placeholder="https://www.youtube.com/watch?v=LZKVeYRT7Dk">
+            <button type="submit">
+                
+
+                Add Movie
+
+            </button>
+            
+
+        </form>
+        <h2>All Movies</h2>
+
+<div id="movieList"></div>
+
+    </div>
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

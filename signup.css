@@ -1,0 +1,309 @@
+/* ==========================================
+   NETFLIX SIGNUP PAGE
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+    url("images/hero.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo{
+
+    position:absolute;
+
+    top:25px;
+    left:50px;
+
+}
+
+.logo img{
+
+    width:180px;
+
+}
+
+/* ==========================================
+   SIGNUP BOX
+========================================== */
+
+.signup-container{
+
+    width:430px;
+
+    background:rgba(0,0,0,.82);
+
+    padding:60px;
+
+    border-radius:10px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+
+}
+
+.signup-container h1{
+
+    font-size:34px;
+
+    margin-bottom:30px;
+
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.signup-container input{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:5px;
+
+    background:#333;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.signup-container input:focus{
+
+    background:#444;
+
+    border:1px solid #e50914;
+
+    box-shadow:0 0 10px rgba(229,9,20,.4);
+
+}
+
+.signup-container input::placeholder{
+
+    color:#bbb;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.signup-container button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:5px;
+
+    background:#e50914;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.signup-container button:hover{
+
+    background:#b20710;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   OPTIONS
+========================================== */
+
+.options{
+
+    margin-top:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:14px;
+
+    color:#b3b3b3;
+
+}
+
+.options input{
+
+    width:auto;
+
+    margin-right:5px;
+
+}
+
+/* ==========================================
+   LOGIN LINK
+========================================== */
+
+.signup-footer{
+
+    margin-top:25px;
+
+    color:#999;
+
+    text-align:center;
+
+}
+
+.signup-footer a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.signup-footer a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   SMALL TEXT
+========================================== */
+
+.small-text{
+
+    margin-top:20px;
+
+    font-size:12px;
+
+    color:#777;
+
+    line-height:1.6;
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+.signup-container{
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+    .signup-container{
+
+        width:90%;
+
+        padding:35px;
+
+    }
+
+    .logo{
+
+        left:20px;
+
+        top:20px;
+
+    }
+
+    .logo img{
+
+        width:130px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .signup-container{
+
+        padding:25px;
+
+    }
+
+    .signup-container h1{
+
+        font-size:28px;
+
+    }
+
+}

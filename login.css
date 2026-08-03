@@ -1,0 +1,114 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9e3c8e2c-2f0b-4c6e-bd4e-0a0f3c2df8d5/9b7b95d8-2fd2-4a7b-9a7b-4b1e95fdb1dc/IN-en-20240115-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    width:420px;
+    background:rgba(0,0,0,0.75);
+    padding:60px 50px;
+    border-radius:8px;
+    color:white;
+    box-shadow:0 0 25px rgba(0,0,0,0.6);
+}
+
+.logo{
+    color:#E50914;
+    text-align:center;
+    font-size:45px;
+    margin-bottom:20px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.login-box h2{
+    margin-bottom:30px;
+    font-size:30px;
+}
+
+.login-box input{
+    width:100%;
+    padding:16px;
+    margin-bottom:20px;
+    border:none;
+    border-radius:5px;
+    background:#333;
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+.login-box input::placeholder{
+    color:#aaa;
+}
+
+.login-box button{
+    width:100%;
+    padding:16px;
+    background:#E50914;
+    border:none;
+    border-radius:5px;
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-box button:hover{
+    background:#b20710;
+}
+
+.login-box p{
+    margin-top:25px;
+    color:#b3b3b3;
+    text-align:center;
+}
+
+.login-box a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.login-box a:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:500px){
+
+    .login-box{
+        width:90%;
+        padding:40px 25px;
+    }
+
+    .logo{
+        font-size:38px;
+    }
+
+    .login-box h2{
+        font-size:26px;
+    }
+
+}

@@ -4,191 +4,171 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Netflix Clone</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
+    <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
+
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+    <!-- ================= NAVBAR ================= -->
 
-<header>
+    <header>
 
-<nav>
+        <nav>
 
-<div class="logo">
+            <div class="logo">
 
-<img src="images/logo.png">
+                <img src="Netflix-Logo-Streaming-Platform-765 (1).png" alt="Netflix Logo">
 
-</div>
+            </div>
 
-<ul>
+            <ul>
 
-<li>Home</li>
+                <li><a href="#">Home</a></li>
 
-<li>TV Shows</li>
+                <li><a href="#">TV Shows</a></li>
 
-<li>Movies</li>
+                <li><a href="#">Movies</a></li>
 
-<li>New & Popular</li>
+                <li><a href="#">New & Popular</a></li>
 
-<li>My List</li>
+                <li><a href="mylist.html">My List</a></li>
 
-</ul>
+            </ul>
 
-<div class="right">
+            <div class="right">
 
-<i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search movies...">
 
-<i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-bell"></i>
 
-<img src="images/profile.png">
+                <img src="—Pngtree—man avatar image for profile_13001882.png"
+                     alt="Profile">
 
-</div>
+                <button id="logoutBtn">Logout</button>
 
-</nav>
+            </div>
 
-</header>
+        </nav>
 
-<!-- HERO -->
+    </header>
 
-<section class="hero">
+    <!-- ================= HERO SECTION ================= -->
 
-<div class="overlay">
+    <section class="hero">
 
-<h1>Money Heist</h1>
+        <div class="overlay">
 
-<p>
+            <h1>Money Heist</h1>
 
-To carry out the biggest heist in history,
-a mysterious man called The Professor
-recruits eight robbers.
+            <p>
 
-</p>
+                Eight thieves take hostages and lock themselves inside the Royal
+                Mint of Spain while a criminal mastermind manipulates the police
+                to carry out the biggest heist in history.
 
-<div class="buttons">
+            </p>
 
-<button class="play">
+            <div class="buttons">
 
-<i class="fa-solid fa-play"></i>
+                <button class="play">
 
-Play
+                    <i class="fa-solid fa-play"></i>
 
-</button>
+                    Play
 
-<button class="info">
+                </button>
 
-More Info
+                <button class="info">
 
-</button>
+                    <i class="fa-solid fa-circle-info"></i>
 
-</div>
+                    More Info
 
-</div>
+                </button>
 
-</section>
+            </div>
 
-<!-- TRENDING -->
+        </div>
 
-<section class="movies">
+    </section>
 
-<h2>Trending Now</h2>
+    <!-- ================= TRENDING ================= -->
 
-<div class="row">
+    <section class="movies">
 
-<img src="images/movie1.jpg">
+        <h2>Trending Now</h2>
 
-<img src="images/movie2.jpg">
+        <div class="row" id="trendingMovies">
 
-<img src="images/movie3.jpg">
+            <!-- Dynamic Movies -->
 
-<img src="images/movie4.jpg">
+        </div>
 
-<img src="images/movie5.jpg">
+    </section>
 
-<img src="images/movie6.jpg">
+    <!-- ================= POPULAR ================= -->
 
-</div>
+    <section class="movies">
 
-</section>
+        <h2>Popular on Netflix</h2>
 
-<!-- POPULAR -->
+        <div class="row" id="popularMovies">
 
-<section class="movies">
+            <!-- Dynamic Movies -->
 
-<h2>Popular on Netflix</h2>
+        </div>
 
-<div class="row">
+    </section>
 
-<img src="images/movie7.jpg">
+    <!-- ================= ACTION ================= -->
 
-<img src="images/movie8.jpg">
+    <section class="movies">
 
-<img src="images/movie9.jpg">
+        <h2>Action Movies</h2>
 
-<img src="images/movie10.jpg">
+        <div class="row" id="actionMovies">
 
-<img src="images/movie11.jpg">
+            <!-- Dynamic Movies -->
 
-<img src="images/movie12.jpg">
+        </div>
 
-</div>
+    </section>
 
-</section>
+    <!-- ================= FOOTER ================= -->
 
-<!-- ACTION -->
+    <footer>
 
-<section class="movies">
+        <div class="footer">
 
-<h2>Action Movies</h2>
+            <p>
 
-<div class="row">
+                © 2026 Netflix Clone | Built using HTML, CSS, JavaScript, Node.js,
+                Express.js & MongoDB
 
-<img src="images/movie13.jpg">
+            </p>
 
-<img src="images/movie14.jpg">
+        </div>
 
-<img src="images/movie15.jpg">
+    </footer>
 
-<img src="images/movie16.jpg">
+    <!-- ================= SCRIPT ================= -->
 
-<img src="images/movie17.jpg">
-
-<img src="images/movie18.jpg">
-
-</div>
-
-</section>
-
-<footer>
-
-<p>
-
-Netflix Clone © 2026
-
-</p>
-
-</footer>
-
-<script src="netflix.js"></script>
+    <script src="netflix.js"></script>
 
 </body>
 
