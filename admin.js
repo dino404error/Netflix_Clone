@@ -6,6 +6,11 @@ const image = document.getElementById("image");
 const category = document.getElementById("category");
 const trailer = document.getElementById("trailer");
 
+const video = document.getElementById("video");
+const year = document.getElementById("year");
+const duration = document.getElementById("duration");
+const rating = document.getElementById("rating");
+
 const movieList = document.getElementById("movieList");
 
 let editMovieId = null;
@@ -40,6 +45,12 @@ async function loadMovies() {
 
                         <p><strong>Category:</strong> ${movie.category}</p>
 
+                        <p><strong>Year:</strong> ${movie.year || "N/A"}</p>
+
+                        <p><strong>Duration:</strong> ${movie.duration || "N/A"}</p>
+
+                        <p><strong>Rating:</strong> ${movie.rating || "N/A"}</p>
+
                         <p><strong>Trailer:</strong> ${movie.trailer || "Not Added"}</p>
 
                         <button onclick="editMovie('${movie._id}')">
@@ -58,9 +69,7 @@ async function loadMovies() {
 
         });
 
-    }
-
-    catch(error){
+    } catch (error) {
 
         console.log(error);
 
@@ -70,43 +79,56 @@ async function loadMovies() {
 
 loadMovies();
 
+
 // ====================================
 // Add / Update Movie
 // ====================================
 
-form.addEventListener("submit", async (e)=>{
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const movie={
+  console.log("Video Input:", video.value);
 
-        title:title.value,
+const movie = {
 
-        description:description.value,
+    title: title.value,
 
-        image:image.value,
+    description: description.value,
 
-        category:category.value,
+    image: image.value,
 
-        trailer:trailer.value
+    category: category.value,
 
-    };
+    trailer: trailer.value,
 
-    try{
+    video: video.value,
+
+    year: year.value,
+
+    duration: duration.value,
+
+    rating: rating.value
+
+};
+
+console.log("Movie Object:", movie);
+
+    try {
 
         // ADD
 
-        if(editMovieId===null){
+        if (editMovieId === null) {
 
-            await fetch("http://localhost:5000/api/movies",{
+            await fetch("http://localhost:5000/api/movies", {
 
-                method:"POST",
+                method: "POST",
 
-                headers:{
-                    "Content-Type":"application/json"
+                headers: {
+                    "Content-Type": "application/json"
                 },
 
-                body:JSON.stringify(movie)
+                body: JSON.stringify(movie)
 
             });
 
@@ -116,37 +138,35 @@ form.addEventListener("submit", async (e)=>{
 
         // UPDATE
 
-        else{
+        else {
 
-            await fetch(`http://localhost:5000/api/movies/${editMovieId}`,{
+            await fetch(`http://localhost:5000/api/movies/${editMovieId}`, {
 
-                method:"PUT",
+                method: "PUT",
 
-                headers:{
-                    "Content-Type":"application/json"
+                headers: {
+                    "Content-Type": "application/json"
                 },
 
-                body:JSON.stringify(movie)
+                body: JSON.stringify(movie)
 
             });
 
             alert("Movie Updated Successfully!");
 
-            editMovieId=null;
+            editMovieId = null;
 
-            form.querySelector("button").innerText="Add Movie";
+            form.querySelector("button").innerText = "Add Movie";
 
         }
 
         form.reset();
 
-        trailer.value="";
-
         loadMovies();
 
     }
 
-    catch(error){
+    catch (error) {
 
         console.log(error);
 
@@ -154,43 +174,54 @@ form.addEventListener("submit", async (e)=>{
 
 });
 
+
 // ====================================
 // Edit Movie
 // ====================================
 
-async function editMovie(id){
+async function editMovie(id) {
 
-    try{
+    try {
 
-        const response=await fetch(`http://localhost:5000/api/movies/${id}`);
+        const response = await fetch(`http://localhost:5000/api/movies/${id}`);
 
-        const movie=await response.json();
+        const movie = await response.json();
 
-        title.value=movie.title;
+        title.value = movie.title;
+        description.value = movie.description;
+        image.value = movie.image;
+        category.value = movie.category;
+        trailer.value = movie.trailer || "";
+        video.value = movie.video || "";
+        year.value = movie.year || "";
+        duration.value = movie.duration || "";
+        rating.value = movie.rating || "";
+        trailer.value=movie.trailer;
 
-        description.value=movie.description;
 
-        image.value=movie.image;
+quality.value=movie.quality;
 
-        category.value=movie.category;
+age.value=movie.age;
 
-        trailer.value=movie.trailer || "";
+language.value=movie.language;
 
-        editMovieId=id;
+genre.value=movie.genre;
 
-        form.querySelector("button").innerText="Update Movie";
+        editMovieId = id;
+
+        form.querySelector("button").innerText = "Update Movie";
 
         window.scrollTo({
 
-            top:0,
+            top: 0,
 
-            behavior:"smooth"
+            behavior: "smooth"
 
         });
 
     }
 
-    catch(error){
+    catch (error) {
 
         console.log(error);
 
@@ -198,25 +229,26 @@ async function editMovie(id){
 
 }
 
+
 // ====================================
 // Delete Movie
 // ====================================
 
-async function deleteMovie(id){
+async function deleteMovie(id) {
 
-    const confirmDelete=confirm("Are you sure you want to delete this movie?");
+    const confirmDelete = confirm("Are you sure you want to delete this movie?");
 
-    if(!confirmDelete){
+    if (!confirmDelete) {
 
         return;
 
     }
 
-    try{
+    try {
 
-        await fetch(`http://localhost:5000/api/movies/${id}`,{
+        await fetch(`http://localhost:5000/api/movies/${id}`, {
 
-            method:"DELETE"
+            method: "DELETE"
 
         });
 
@@ -226,7 +258,7 @@ async function deleteMovie(id){
 
     }
 
-    catch(error){
+    catch (error) {
 
         console.log(error);
 
