@@ -125,7 +125,10 @@ function getVideoUrl(url) {
 
     catch (error) {
 
-        console.log("Video URL error:", error);
+        console.log(
+            "Video URL error:",
+            error
+        );
 
         return url;
 
@@ -142,7 +145,9 @@ async function loadMovie() {
 
     if (!movieId) {
 
-        console.log("Movie ID missing");
+        console.log(
+            "Movie ID missing"
+        );
 
         return;
 
@@ -159,32 +164,48 @@ async function loadMovie() {
 
         if (!response.ok) {
 
-            throw new Error("Movie not found");
+            throw new Error(
+                "Movie not found"
+            );
 
         }
 
 
-        movie = await response.json();
+        movie =
+            await response.json();
 
 
-        console.log("MOVIE:", movie);
+        console.log(
+            "MOVIE:",
+            movie
+        );
 
 
         // ==================================
         // BACKDROP
         // ==================================
 
-        if (heroBackdrop && movie.image) {
+        if (
+            heroBackdrop &&
+            movie.image
+        ) {
 
-            heroBackdrop.src = movie.image;
+            heroBackdrop.src =
+                movie.image;
 
-            heroBackdrop.onerror = function () {
 
-                console.log("Poster image failed:", movie.image);
+            heroBackdrop.onerror =
+                function () {
 
-                this.style.display = "none";
+                    console.log(
+                        "Poster image failed:",
+                        movie.image
+                    );
 
-            };
+                    this.style.display =
+                        "none";
+
+                };
 
         }
 
@@ -193,69 +214,177 @@ async function loadMovie() {
         // TRAILER
         // ==================================
 
-        if (movie.trailer && heroTrailer) {
+        if (
+            movie.trailer &&
+            heroTrailer
+        ) {
 
             const videoUrl =
-                getVideoUrl(movie.trailer);
+                getVideoUrl(
+                    movie.trailer
+                );
 
-            console.log("Trailer URL:", videoUrl);
+
+            console.log(
+                "Trailer URL:",
+                videoUrl
+            );
 
 
-            // YouTube cannot be played inside
-            // a normal HTML <video> element.
+            // ==================================
+            // YOUTUBE TRAILER
+            // ==================================
 
-            if (videoUrl.includes("youtube.com/embed/")) {
+            if (
+                videoUrl.includes(
+                    "youtube.com/embed/"
+                )
+            ) {
 
                 console.log(
                     "YouTube trailer detected."
                 );
 
-                // Hide HTML video player
 
-                heroTrailer.style.display = "none";
+                // Hide normal HTML video
+
+                heroTrailer.style.display =
+                    "none";
 
 
                 // Create YouTube iframe
 
-                const iframe =
-                    document.createElement("iframe");
-
-                iframe.id = "youtubeTrailer";
-
-                iframe.src =
-                    videoUrl;
-
-                iframe.allow =
-                    "autoplay; encrypted-media; picture-in-picture";
-
-                iframe.allowFullscreen = true;
-
-                iframe.frameBorder = "0";
+                let iframe =
+                    document.getElementById(
+                        "youtubeTrailer"
+                    );
 
 
-                iframe.style.position = "absolute";
-                iframe.style.inset = "0";
-                iframe.style.width = "100%";
-                iframe.style.height = "100%";
-                iframe.style.border = "0";
-                iframe.style.opacity = "0";
-                iframe.style.transition = "opacity .6s ease";
+                if (!iframe) {
+
+                    iframe =
+                        document.createElement(
+                            "iframe"
+                        );
 
 
-                heroTrailer.parentElement.appendChild(
-                    iframe
-                );
+                    iframe.id =
+                        "youtubeTrailer";
+
+
+                    iframe.allow =
+                        "autoplay; encrypted-media; picture-in-picture; fullscreen";
+
+
+                    iframe.allowFullscreen =
+                        true;
+
+
+                    iframe.setAttribute(
+                        "allowfullscreen",
+                        ""
+                    );
+
+
+                    iframe.frameBorder =
+                        "0";
+
+
+                    iframe.style.position =
+                        "absolute";
+
+
+                    iframe.style.inset =
+                        "0";
+
+
+                    iframe.style.width =
+                        "100%";
+
+
+                    iframe.style.height =
+                        "100%";
+
+
+                    iframe.style.border =
+                        "0";
+
+
+                    iframe.style.opacity =
+                        "0";
+
+
+                    iframe.style.transition =
+                        "opacity .6s ease";
+
+
+                    iframe.style.zIndex =
+                        "10";
+
+
+                    heroTrailer.parentElement.appendChild(
+                        iframe
+                    );
+
+                }
+
+
+                // Extract YouTube ID
+
+                let youtubeId =
+                    "";
+
+
+                try {
+
+                    const youtubeUrl =
+                        new URL(
+                            videoUrl
+                        );
+
+
+                    youtubeId =
+                        youtubeUrl.pathname
+                            .split("/")
+                            .filter(Boolean)
+                            .pop();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "YouTube ID error:",
+                        error
+                    );
+
+                }
+
+
+                // Load video but do NOT
+                // automatically force browser fullscreen
+
+                if (youtubeId) {
+
+                    iframe.src =
+                        `https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0&controls=1&fs=1&playsinline=0`;
+
+                }
 
 
                 // Show trailer after 5 seconds
 
                 setTimeout(() => {
 
-                    iframe.style.opacity = "1";
+                    iframe.style.opacity =
+                        "1";
+
 
                     if (heroBackdrop) {
 
-                        heroBackdrop.classList.add("hide");
+                        heroBackdrop.classList.add(
+                            "hide"
+                        );
 
                     }
 
@@ -263,31 +392,43 @@ async function loadMovie() {
 
             }
 
+
             else {
 
                 // ==================================
                 // NORMAL MP4 VIDEO
                 // ==================================
 
-                heroTrailer.style.display = "block";
+                heroTrailer.style.display =
+                    "block";
+
 
                 trailerSource.src =
                     videoUrl;
+
 
                 heroTrailer.load();
 
 
                 setTimeout(() => {
 
-                    heroTrailer.classList.add("show");
+                    heroTrailer.classList.add(
+                        "show"
+                    );
+
 
                     if (heroBackdrop) {
 
-                        heroBackdrop.classList.add("hide");
+                        heroBackdrop.classList.add(
+                            "hide"
+                        );
 
                     }
 
-                    heroTrailer.muted = true;
+
+                    heroTrailer.muted =
+                        true;
+
 
                     heroTrailer.play()
                         .catch(error => {
@@ -313,7 +454,8 @@ async function loadMovie() {
         if (movieTitle) {
 
             movieTitle.innerText =
-                movie.title || "Untitled";
+                movie.title ||
+                "Untitled";
 
         }
 
@@ -321,7 +463,8 @@ async function loadMovie() {
         if (movieDescription) {
 
             movieDescription.innerText =
-                movie.description || "";
+                movie.description ||
+                "";
 
         }
 
@@ -329,7 +472,8 @@ async function loadMovie() {
         if (overview) {
 
             overview.innerText =
-                movie.description || "";
+                movie.description ||
+                "";
 
         }
 
@@ -337,7 +481,8 @@ async function loadMovie() {
         if (movieYear) {
 
             movieYear.innerText =
-                movie.year || "2025";
+                movie.year ||
+                "2025";
 
         }
 
@@ -345,7 +490,8 @@ async function loadMovie() {
         if (movieDuration) {
 
             movieDuration.innerText =
-                movie.duration || "2h";
+                movie.duration ||
+                "2h";
 
         }
 
@@ -353,7 +499,8 @@ async function loadMovie() {
         if (movieCategory) {
 
             movieCategory.innerText =
-                movie.category || "Movie";
+                movie.category ||
+                "Movie";
 
         }
 
@@ -371,7 +518,8 @@ async function loadMovie() {
         if (release) {
 
             release.innerText =
-                movie.year || "2025";
+                movie.year ||
+                "2025";
 
         }
 
@@ -379,7 +527,8 @@ async function loadMovie() {
         if (duration) {
 
             duration.innerText =
-                movie.duration || "2h";
+                movie.duration ||
+                "2h";
 
         }
 
@@ -387,7 +536,8 @@ async function loadMovie() {
         if (language) {
 
             language.innerText =
-                movie.language || "English";
+                movie.language ||
+                "English";
 
         }
 
@@ -399,7 +549,6 @@ async function loadMovie() {
         loadRecommendations(
             movie.category
         );
-
 
     }
 
@@ -427,6 +576,7 @@ if (playBtn) {
 
             if (!movie) return;
 
+
             if (!movie.trailer) {
 
                 alert(
@@ -439,7 +589,9 @@ if (playBtn) {
 
 
             const videoUrl =
-                getVideoUrl(movie.trailer);
+                getVideoUrl(
+                    movie.trailer
+                );
 
 
             // ==================================
@@ -452,17 +604,132 @@ if (playBtn) {
                 )
             ) {
 
-                const iframe =
+                let iframe =
                     document.getElementById(
                         "youtubeTrailer"
                     );
 
 
-                if (iframe) {
+                // ----------------------------------
+                // Create iframe if missing
+                // ----------------------------------
 
-                    iframe.style.opacity = "1";
+                if (!iframe) {
+
+                    iframe =
+                        document.createElement(
+                            "iframe"
+                        );
+
+
+                    iframe.id =
+                        "youtubeTrailer";
+
+
+                    iframe.allow =
+                        "autoplay; encrypted-media; picture-in-picture; fullscreen";
+
+
+                    iframe.allowFullscreen =
+                        true;
+
+
+                    iframe.setAttribute(
+                        "allowfullscreen",
+                        ""
+                    );
+
+
+                    iframe.frameBorder =
+                        "0";
+
+
+                    iframe.style.position =
+                        "absolute";
+
+
+                    iframe.style.inset =
+                        "0";
+
+
+                    iframe.style.width =
+                        "100%";
+
+
+                    iframe.style.height =
+                        "100%";
+
+
+                    iframe.style.border =
+                        "0";
+
+
+                    iframe.style.opacity =
+                        "1";
+
+
+                    iframe.style.zIndex =
+                        "10";
+
+
+                    heroTrailer.parentElement.appendChild(
+                        iframe
+                    );
 
                 }
+
+
+                // ----------------------------------
+                // Get YouTube ID
+                // ----------------------------------
+
+                let youtubeId =
+                    "";
+
+
+                try {
+
+                    const youtubeUrl =
+                        new URL(
+                            videoUrl
+                        );
+
+
+                    youtubeId =
+                        youtubeUrl.pathname
+                            .split("/")
+                            .filter(Boolean)
+                            .pop();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "YouTube ID error:",
+                        error
+                    );
+
+                    return;
+
+                }
+
+
+                // ----------------------------------
+                // Start YouTube video
+                // ----------------------------------
+
+                iframe.src =
+                    `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&controls=1&fs=1&playsinline=0`;
+
+
+                iframe.style.opacity =
+                    "1";
+
+
+                iframe.classList.add(
+                    "youtube-active"
+                );
 
 
                 if (heroBackdrop) {
@@ -472,6 +739,27 @@ if (playBtn) {
                     );
 
                 }
+
+
+                console.log(
+                    "YouTube Play clicked:",
+                    youtubeId
+                );
+
+
+                /*
+                 * IMPORTANT:
+                 *
+                 * We do NOT call requestFullscreen()
+                 * here.
+                 *
+                 * The YouTube player itself gets its
+                 * fullscreen button through fs=1.
+                 *
+                 * This gives a much more Netflix-like
+                 * experience instead of immediately
+                 * forcing browser fullscreen.
+                 */
 
 
                 return;
@@ -485,11 +773,14 @@ if (playBtn) {
 
             if (heroTrailer) {
 
-                heroTrailer.currentTime = 0;
+                heroTrailer.currentTime =
+                    0;
+
 
                 heroTrailer.classList.add(
                     "show"
                 );
+
 
                 if (heroBackdrop) {
 
@@ -499,9 +790,13 @@ if (playBtn) {
 
                 }
 
-                heroTrailer.muted = false;
 
-                muted = false;
+                heroTrailer.muted =
+                    false;
+
+
+                muted =
+                    false;
 
 
                 if (soundBtn) {
@@ -543,7 +838,9 @@ if (soundBtn) {
             if (!heroTrailer) return;
 
 
-            muted = !muted;
+            muted =
+                !muted;
+
 
             heroTrailer.muted =
                 muted;
@@ -610,7 +907,9 @@ if (heroTrailer) {
 // MORE LIKE THIS
 // ==========================================
 
-async function loadRecommendations(category) {
+async function loadRecommendations(
+    category
+) {
 
     if (!recommendedMovies) return;
 
@@ -627,21 +926,24 @@ async function loadRecommendations(category) {
             await response.json();
 
 
-        recommendedMovies.innerHTML = "";
+        recommendedMovies.innerHTML =
+            "";
 
 
         const filteredMovies =
-            movies.filter(item => {
+            movies.filter(
+                item => {
 
-                return (
-                    item._id !== movieId &&
-                    (
-                        !category ||
-                        item.category === category
-                    )
-                );
+                    return (
+                        item._id !== movieId &&
+                        (
+                            !category ||
+                            item.category === category
+                        )
+                    );
 
-            });
+                }
+            );
 
 
         // If same category has no movies,
@@ -651,58 +953,67 @@ async function loadRecommendations(category) {
             filteredMovies.length > 0
                 ? filteredMovies
                 : movies.filter(
-                    item => item._id !== movieId
+                    item =>
+                        item._id !== movieId
                 );
 
 
         finalMovies
             .slice(0, 10)
-            .forEach(item => {
+            .forEach(
+                item => {
 
-                recommendedMovies.innerHTML += `
+                    recommendedMovies.innerHTML += `
 
-                    <div class="movie-card">
+                        <div class="movie-card">
 
-                        <img
-                            src="${item.image || ""}"
-                            alt="${item.title || "Movie"}"
-                            loading="lazy"
-                        >
+                            <img
+                                src="${item.image || ""}"
+                                alt="${item.title || "Movie"}"
+                                loading="lazy"
+                            >
 
-                        <div class="movie-overlay">
+                            <div class="movie-overlay">
 
-                            <h3>
-                                ${item.title || "Untitled"}
-                            </h3>
+                                <h3>
+                                    ${item.title || "Untitled"}
+                                </h3>
 
-                            <div class="card-buttons">
+                                <div class="card-buttons">
 
-                                <button
-                                    onclick="
-                                        location.href='movie.html?id=${item._id}'
-                                    "
-                                >
-                                    <i class="fa-solid fa-play"></i>
-                                    Play
-                                </button>
+                                    <button
+                                        onclick="
+                                            location.href='movie.html?id=${item._id}'
+                                        "
+                                    >
 
-                                <button
-                                    onclick="
-                                        location.href='movie.html?id=${item._id}'
-                                    "
-                                >
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </button>
+                                        <i class="fa-solid fa-play"></i>
+
+                                        Play
+
+                                    </button>
+
+
+                                    <button
+                                        onclick="
+                                            location.href='movie.html?id=${item._id}'
+                                        "
+                                    >
+
+                                        <i class="fa-solid fa-circle-info"></i>
+
+                                    </button>
+
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
+                    `;
 
-                `;
-
-            });
+                }
+            );
 
     }
 
@@ -752,7 +1063,9 @@ if (myListBtn) {
                         "http://localhost:5000/api/favorites",
                         {
 
-                            method: "POST",
+                            method:
+                                "POST",
+
 
                             headers: {
 
@@ -760,6 +1073,7 @@ if (myListBtn) {
                                     "application/json"
 
                             },
+
 
                             body:
                                 JSON.stringify({
@@ -803,7 +1117,8 @@ if (myListBtn) {
 // LIKE BUTTON
 // ==========================================
 
-let liked = false;
+let liked =
+    false;
 
 
 if (likeBtn) {
@@ -812,7 +1127,8 @@ if (likeBtn) {
         "click",
         () => {
 
-            liked = !liked;
+            liked =
+                !liked;
 
 
             if (liked) {
@@ -845,9 +1161,7 @@ document.addEventListener(
     "visibilitychange",
     () => {
 
-        if (
-            document.hidden
-        ) {
+        if (document.hidden) {
 
             if (heroTrailer) {
 
@@ -867,7 +1181,9 @@ document.addEventListener(
             ) {
 
                 heroTrailer.play()
-                    .catch(() => {});
+                    .catch(
+                        () => {}
+                    );
 
             }
 
@@ -905,7 +1221,9 @@ window.addEventListener(
             ) {
 
                 heroTrailer.play()
-                    .catch(() => {});
+                    .catch(
+                        () => {}
+                    );
 
             }
 
@@ -926,6 +1244,7 @@ window.addEventListener(
         document.body.style.opacity =
             "1";
 
+
         window.scrollTo(
             0,
             0
@@ -933,6 +1252,988 @@ window.addEventListener(
 
     }
 );
+
+
+// ==========================================
+// SMART WATCH HISTORY
+// ==========================================
+
+function saveMovieHistory() {
+
+    if (
+        !movie ||
+        !movieId
+    ) return;
+
+
+    let history =
+        [];
+
+
+    try {
+
+        history =
+            JSON.parse(
+                localStorage.getItem(
+                    "movieHistory"
+                )
+            ) || [];
+
+    }
+
+    catch (error) {
+
+        history =
+            [];
+
+    }
+
+
+    // Remove existing copy
+
+    history =
+        history.filter(
+            item =>
+                item.movieId !== movieId
+        );
+
+
+    // Add latest movie
+
+    history.unshift({
+
+        movieId:
+            movieId,
+
+
+        title:
+            movie.title ||
+            "Untitled",
+
+
+        image:
+            movie.image ||
+            "",
+
+
+        category:
+            movie.category ||
+            "Movie",
+
+
+        watchedAt:
+            Date.now()
+
+    });
+
+
+    // Keep only last 10
+
+    history =
+        history.slice(
+            0,
+            10
+        );
+
+
+    localStorage.setItem(
+        "movieHistory",
+        JSON.stringify(
+            history
+        )
+    );
+
+
+    console.log(
+        "Smart history saved:",
+        history
+    );
+
+}
+
+
+// ==========================================
+// SMART WATCH PROGRESS
+// ==========================================
+
+let watchProgressTimer =
+    null;
+
+
+function saveWatchProgress() {
+
+    if (
+        !movie ||
+        !movieId ||
+        !heroTrailer
+    ) return;
+
+
+    // Only save progress for real video files
+
+    if (!movie.trailer) return;
+
+
+    if (
+        !heroTrailer.duration ||
+        isNaN(
+            heroTrailer.duration
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const progress = {
+
+        movieId:
+            movieId,
+
+
+        title:
+            movie.title ||
+            "Untitled",
+
+
+        image:
+            movie.image ||
+            "",
+
+
+        currentTime:
+            heroTrailer.currentTime,
+
+
+        duration:
+            heroTrailer.duration,
+
+
+        updatedAt:
+            Date.now()
+
+    };
+
+
+    localStorage.setItem(
+
+        `watchProgress_${movieId}`,
+
+        JSON.stringify(
+            progress
+        )
+
+    );
+
+
+    console.log(
+        "Watch progress saved:",
+        progress
+    );
+
+}
+
+
+// ==========================================
+// START WATCH PROGRESS
+// ==========================================
+
+function startWatchProgress() {
+
+    if (watchProgressTimer) {
+
+        clearInterval(
+            watchProgressTimer
+        );
+
+    }
+
+
+    watchProgressTimer =
+        setInterval(
+            () => {
+
+                if (
+                    heroTrailer &&
+                    !heroTrailer.paused &&
+                    heroTrailer.currentTime > 0
+                ) {
+
+                    saveWatchProgress();
+
+                }
+
+            },
+            5000
+        );
+
+}
+
+
+// ==========================================
+// RESTORE WATCH PROGRESS
+// ==========================================
+
+function restoreWatchProgress() {
+
+    if (
+        !heroTrailer ||
+        !movieId
+    ) return;
+
+
+    const saved =
+        localStorage.getItem(
+            `watchProgress_${movieId}`
+        );
+
+
+    if (!saved) return;
+
+
+    try {
+
+        const progress =
+            JSON.parse(
+                saved
+            );
+
+
+        if (
+            progress.currentTime > 5 &&
+            progress.currentTime <
+                progress.duration - 10
+        ) {
+
+            heroTrailer.currentTime =
+                progress.currentTime;
+
+
+            console.log(
+                "Restored watch progress:",
+                progress.currentTime
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Progress restore error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// VIDEO PROGRESS EVENTS
+// ==========================================
+
+if (heroTrailer) {
+
+    heroTrailer.addEventListener(
+        "play",
+        () => {
+
+            startWatchProgress();
+
+        }
+    );
+
+
+    heroTrailer.addEventListener(
+        "pause",
+        () => {
+
+            saveWatchProgress();
+
+        }
+    );
+
+
+    heroTrailer.addEventListener(
+        "timeupdate",
+        () => {
+
+            if (
+                Math.floor(
+                    heroTrailer.currentTime
+                ) % 10 === 0
+            ) {
+
+                saveWatchProgress();
+
+            }
+
+        }
+    );
+
+
+    heroTrailer.addEventListener(
+        "loadedmetadata",
+        () => {
+
+            restoreWatchProgress();
+
+        }
+    );
+
+
+    heroTrailer.addEventListener(
+        "ended",
+        () => {
+
+            localStorage.removeItem(
+                `watchProgress_${movieId}`
+            );
+
+
+            console.log(
+                "Movie completed — progress cleared."
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// AI MOVIE ASSISTANT
+// ==========================================
+
+const aiMovieBtn =
+    document.getElementById(
+        "aiMovieBtn"
+    );
+
+
+const aiMovieSection =
+    document.getElementById(
+        "aiMovieSection"
+    );
+
+
+const closeAiMovie =
+    document.getElementById(
+        "closeAiMovie"
+    );
+
+
+const aiMovieInput =
+    document.getElementById(
+        "aiMovieInput"
+    );
+
+
+const aiMovieSend =
+    document.getElementById(
+        "aiMovieSend"
+    );
+
+
+const aiChat =
+    document.getElementById(
+        "aiChat"
+    );
+
+
+// ==========================================
+// OPEN AI
+// ==========================================
+
+if (aiMovieBtn) {
+
+    aiMovieBtn.addEventListener(
+        "click",
+        () => {
+
+            if (!aiMovieSection) return;
+
+
+            aiMovieSection.style.display =
+                "block";
+
+
+            aiMovieSection.scrollIntoView({
+                behavior:
+                    "smooth",
+                block:
+                    "start"
+            });
+
+
+            setTimeout(
+                () => {
+
+                    if (aiMovieInput) {
+
+                        aiMovieInput.focus();
+
+                    }
+
+                },
+                500
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// CLOSE AI
+// ==========================================
+
+if (closeAiMovie) {
+
+    closeAiMovie.addEventListener(
+        "click",
+        () => {
+
+            if (aiMovieSection) {
+
+                aiMovieSection.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// ADD AI MESSAGE
+// ==========================================
+
+function addAIMessage(
+    message,
+    user = false
+) {
+
+    if (!aiChat) return;
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        user
+            ? "ai-message ai-user"
+            : "ai-message ai-bot";
+
+
+    if (user) {
+
+        div.innerHTML = `
+
+            <div class="ai-avatar user-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+            <div>
+
+                ${message}
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+        div.innerHTML = `
+
+            <div class="ai-avatar">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            </div>
+
+            <div>
+
+                ${message}
+
+            </div>
+
+        `;
+
+    }
+
+
+    aiChat.appendChild(
+        div
+    );
+
+
+    aiChat.scrollTop =
+        aiChat.scrollHeight;
+
+}
+
+
+// ==========================================
+// ASK MOVIE AI
+// ==========================================
+
+async function askMovieAI(
+    question
+) {
+
+    if (!movie) {
+
+        addAIMessage(
+            "Movie information is still loading..."
+        );
+
+        return;
+
+    }
+
+
+    addAIMessage(
+        question,
+        true
+    );
+
+
+    addAIMessage(
+        "Thinking...",
+        false
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/ai/movie",
+                {
+
+                    method:
+                        "POST",
+
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+
+                    body:
+                        JSON.stringify({
+
+                            movieId:
+                                movieId,
+
+
+                            question:
+                                question,
+
+
+                            movie: {
+
+                                title:
+                                    movie.title,
+
+
+                                description:
+                                    movie.description,
+
+
+                                genre:
+                                    movie.genre ||
+                                    movie.category,
+
+
+                                year:
+                                    movie.year
+
+                            }
+
+                        })
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "AI endpoint unavailable"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const thinkingMessages =
+            aiChat.querySelectorAll(
+                ".ai-bot"
+            );
+
+
+        const lastMessage =
+            thinkingMessages[
+                thinkingMessages.length - 1
+            ];
+
+
+        if (lastMessage) {
+
+            lastMessage.remove();
+
+        }
+
+
+        addAIMessage(
+
+            data.answer ||
+            data.message ||
+            "I couldn't generate an answer right now."
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "AI ERROR:",
+            error
+        );
+
+
+        const thinkingMessages =
+            aiChat.querySelectorAll(
+                ".ai-bot"
+            );
+
+
+        const lastMessage =
+            thinkingMessages[
+                thinkingMessages.length - 1
+            ];
+
+
+        if (lastMessage) {
+
+            lastMessage.remove();
+
+        }
+
+
+        addAIMessage(
+
+            "AI is not connected yet. Connect your /api/ai/movie backend endpoint to enable the Netflix AI assistant."
+
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// AI SEND BUTTON
+// ==========================================
+
+if (aiMovieSend) {
+
+    aiMovieSend.addEventListener(
+        "click",
+        () => {
+
+            const question =
+                aiMovieInput
+                    ?.value
+                    .trim();
+
+
+            if (!question) return;
+
+
+            aiMovieInput.value =
+                "";
+
+
+            askMovieAI(
+                question
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// AI ENTER KEY
+// ==========================================
+
+if (aiMovieInput) {
+
+    aiMovieInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+
+                if (aiMovieSend) {
+
+                    aiMovieSend.click();
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// AI SUGGESTIONS
+// ==========================================
+
+document
+    .querySelectorAll(
+        ".ai-suggestion"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const question =
+                        button.dataset.question;
+
+
+                    if (question) {
+
+                        askMovieAI(
+                            question
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+// ==========================================
+// AI DISCOVERY
+// ==========================================
+
+const aiSimilarBtn =
+    document.getElementById(
+        "aiSimilarBtn"
+    );
+
+
+if (aiSimilarBtn) {
+
+    aiSimilarBtn.addEventListener(
+        "click",
+        () => {
+
+            if (!aiMovieSection) return;
+
+
+            aiMovieSection.style.display =
+                "block";
+
+
+            aiMovieSection.scrollIntoView({
+                behavior:
+                    "smooth"
+            });
+
+
+            setTimeout(
+                () => {
+
+                    askMovieAI(
+                        "Based on this movie, recommend my next 5 movies and explain why each one matches."
+                    );
+
+                },
+                400
+            );
+
+        }
+    );
+
+}
+
+
+const aiMoodBtn =
+    document.getElementById(
+        "aiMoodBtn"
+    );
+
+
+if (aiMoodBtn) {
+
+    aiMoodBtn.addEventListener(
+        "click",
+        () => {
+
+            if (!aiMovieSection) return;
+
+
+            aiMovieSection.style.display =
+                "block";
+
+
+            aiMovieSection.scrollIntoView({
+                behavior:
+                    "smooth"
+            });
+
+
+            setTimeout(
+                () => {
+
+                    askMovieAI(
+                        "Based on this movie, what mood is it best for and what other movies should I watch for the same mood?"
+                    );
+
+                },
+                400
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// SHARE MOVIE
+// ==========================================
+
+const shareMovie =
+    document.getElementById(
+        "shareMovie"
+    );
+
+
+if (shareMovie) {
+
+    shareMovie.addEventListener(
+        "click",
+        async () => {
+
+            const titleElement =
+                document.getElementById(
+                    "movieTitle"
+                );
+
+
+            const title =
+                titleElement
+                    ? titleElement.innerText
+                    : "this movie";
+
+
+            const shareData = {
+
+                title:
+                    document.title,
+
+
+                text:
+                    `Check out ${title} on my Netflix Clone.`,
+
+
+                url:
+                    window.location.href
+
+            };
+
+
+            try {
+
+                if (
+                    navigator.share
+                ) {
+
+                    await navigator.share(
+                        shareData
+                    );
+
+                }
+
+                else if (
+                    navigator.clipboard
+                ) {
+
+                    await navigator.clipboard.writeText(
+                        window.location.href
+                    );
+
+
+                    alert(
+                        "Movie link copied!"
+                    );
+
+                }
+
+                else {
+
+                    alert(
+                        window.location.href
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    "Share cancelled:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 // ==========================================
