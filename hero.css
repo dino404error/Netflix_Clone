@@ -1,0 +1,179 @@
+/* ==========================================
+   HERO SECTION
+========================================== */
+
+.hero{
+    position: relative;
+    width: 100%;
+    height: 92vh;
+    display: flex;
+    align-items: center;
+    padding: 0 70px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.90) 0%,
+            rgba(0,0,0,.75) 25%,
+            rgba(0,0,0,.35) 55%,
+            rgba(0,0,0,.10) 100%
+        );
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:220px;
+    background:linear-gradient(
+        to top,
+        #141414,
+        rgba(20,20,20,.75),
+        transparent
+    );
+}
+
+.overlay{
+    position:relative;
+    z-index:2;
+    width:42%;
+    max-width:650px;
+    margin-top:60px;
+}
+
+.overlay h1{
+    font-size:4.5rem;
+    font-weight:800;
+    line-height:1.05;
+    margin-bottom:22px;
+    text-shadow:0 5px 25px rgba(0,0,0,.8);
+}
+
+.overlay p{
+    font-size:1.1rem;
+    line-height:1.8;
+    color:#e5e5e5;
+    margin-bottom:30px;
+    max-width:560px;
+
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+}
+
+.play,
+.info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 34px;
+    border-radius:4px;
+    font-size:1.05rem;
+    font-weight:700;
+    transition:.25s;
+}
+
+.play{
+    background:#fff;
+    color:#000;
+}
+
+.play:hover{
+    background:#e6e6e6;
+}
+
+.info{
+    background:rgba(109,109,110,.75);
+    color:#fff;
+}
+
+.info:hover{
+    background:rgba(109,109,110,.55);
+}
+
+.play i,
+.info i{
+    font-size:20px;
+}
+
+@media(max-width:992px){
+
+.hero{
+
+padding:0 40px;
+height:82vh;
+
+}
+
+.overlay{
+
+width:65%;
+
+}
+
+.overlay h1{
+
+font-size:3.4rem;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero{
+
+padding:0 25px;
+height:75vh;
+
+}
+
+.overlay{
+
+width:100%;
+
+}
+
+.overlay h1{
+
+font-size:2.5rem;
+
+}
+
+.overlay p{
+
+font-size:.95rem;
+
+}
+
+.buttons{
+
+flex-wrap:wrap;
+
+}
+
+.play,
+.info{
+
+padding:12px 24px;
+
+}
+
+}
