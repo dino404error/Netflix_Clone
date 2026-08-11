@@ -6,169 +6,460 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Netflix Clone</title>
+    <title>Netflix</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
 
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-    <header>
+<header>
 
-        <nav>
+    <div class="navbar">
 
-            <div class="logo">
+        <div class="left">
 
-                <img src="Netflix-Logo-Streaming-Platform-765 (1).png" alt="Netflix Logo">
+            <img
+                src="Netflix-Logo-Streaming-Platform-765 (1).png"
+                class="logo"
+                alt="Netflix"
+            >
 
-            </div>
+            <nav>
 
-            <ul>
+                <a href="#" class="active">Home</a>
+                <a href="#movies">Movies</a>
+                <a href="#trending">Trending</a>
+                <a href="#popular">Popular</a>
+                <a href="#action">Action</a>
 
-                <li><a href="#">Home</a></li>
+            </nav>
 
-                <li><a href="#">TV Shows</a></li>
+        </div>
 
-                <li><a href="#">Movies</a></li>
 
-                <li><a href="#">New & Popular</a></li>
+        <div class="right">
 
-                <li><a href="mylist.html">My List</a></li>
+            <div class="search-box">
 
-            </ul>
-
-            <div class="right">
+                <i class="fa-solid fa-magnifying-glass"></i>
 
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="Search movies...">
-
-                <i class="fa-solid fa-bell"></i>
-
-                <img src="—Pngtree—man avatar image for profile_13001882.png"
-                     alt="Profile">
-
-                <button id="logoutBtn">Logout</button>
+                    placeholder="Search"
+                >
 
             </div>
 
-        </nav>
+            <i class="fa-regular fa-bell notification"></i>
 
-    </header>
+            <img
+                src="avatar.png"
+                alt="Profile"
+                class="profile"
+            >
 
-    <!-- ================= HERO SECTION ================= -->
+            <button id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
 
-    <section class="hero">
+        </div>
 
-        <div class="overlay">
+    </div>
 
-            <h1>Money Heist</h1>
+</header>
 
-            <p>
 
-                Eight thieves take hostages and lock themselves inside the Royal
-                Mint of Spain while a criminal mastermind manipulates the police
-                to carry out the biggest heist in history.
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-            </p>
+<section class="hero">
 
-            <div class="buttons">
+    <div class="hero-content">
 
-                <button class="play">
+        <span class="hero-label">
+            NETFLIX ORIGINAL
+        </span>
 
-                    <i class="fa-solid fa-play"></i>
+        <h1>
+            Loading...
+        </h1>
 
-                    Play
+        <div class="hero-meta">
 
-                </button>
+            <span class="match">
+                98% Match
+            </span>
 
-                <button class="info">
+            <span>
+                2025
+            </span>
 
-                    <i class="fa-solid fa-circle-info"></i>
+            <span>
+                2h 15m
+            </span>
 
-                    More Info
+            <span class="hd">
+                HD
+            </span>
 
-                </button>
+        </div>
+
+        <p>
+            Loading movie description...
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <button class="play">
+
+                <i class="fa-solid fa-play"></i>
+
+                Play
+
+            </button>
+
+
+            <button class="info">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                More Info
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main id="movies">
+
+
+<!-- =====================================================
+     CONTINUE WATCHING
+===================================================== -->
+
+<section class="movies continue-section">
+
+    <div class="section-header">
+
+        <h2>
+            Continue Watching
+        </h2>
+
+    </div>
+
+    <div
+        id="continueWatching"
+        class="movie-row"
+    >
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TOP 10
+===================================================== -->
+
+<section class="movies">
+
+    <div class="section-header">
+
+        <h2>
+            Top 10 Movies Today
+        </h2>
+
+    </div>
+
+    <div
+        id="top10Movies"
+        class="movie-row top10-row"
+    >
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TRENDING
+===================================================== -->
+
+<section
+    class="movies"
+    id="trending"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Trending Now
+        </h2>
+
+        <a href="#">
+            See All
+        </a>
+
+    </div>
+
+    <div
+        id="trendingMovies"
+        class="movie-row"
+    >
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPULAR
+===================================================== -->
+
+<section
+    class="movies"
+    id="popular"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Popular on Netflix
+        </h2>
+
+        <a href="#">
+            See All
+        </a>
+
+    </div>
+
+    <div
+        id="popularMovies"
+        class="movie-row"
+    >
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACTION
+===================================================== -->
+
+<section
+    class="movies"
+    id="action"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Action Movies
+        </h2>
+
+        <a href="#">
+            See All
+        </a>
+
+    </div>
+
+    <div
+        id="actionMovies"
+        class="movie-row"
+    >
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MY LIST
+===================================================== -->
+
+<section class="movies">
+
+    <div class="section-header">
+
+        <h2>
+            My List
+        </h2>
+
+    </div>
+
+    <div
+        id="myListMovies"
+        class="movie-row"
+    >
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NETFLIX ORIGINALS
+===================================================== -->
+
+<section class="movies">
+
+    <div class="section-header">
+
+        <h2>
+            Netflix Originals
+        </h2>
+
+    </div>
+
+    <div
+        id="originalMovies"
+        class="movie-row"
+    >
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-column">
+
+            <h3>
+                Netflix
+            </h3>
+
+            <a href="#">
+                Audio and Subtitles
+            </a>
+
+            <a href="#">
+                Media Center
+            </a>
+
+            <a href="#">
+                Privacy
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Help
+            </h3>
+
+            <a href="#">
+                Help Center
+            </a>
+
+            <a href="#">
+                Contact Us
+            </a>
+
+            <a href="#">
+                Account
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Browse
+            </h3>
+
+            <a href="#">
+                Movies
+            </a>
+
+            <a href="#">
+                TV Shows
+            </a>
+
+            <a href="#">
+                New Releases
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Connect
+            </h3>
+
+            <div class="social-icons">
+
+                <i class="fa-brands fa-facebook"></i>
+
+                <i class="fa-brands fa-instagram"></i>
+
+                <i class="fa-brands fa-youtube"></i>
+
+                <i class="fa-brands fa-x-twitter"></i>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
-    <!-- ================= TRENDING ================= -->
 
-    <section class="movies">
+    <div class="footer-bottom">
 
-        <h2>Trending Now</h2>
+        © 2026 Netflix Clone. All Rights Reserved.
 
-        <div class="row" id="trendingMovies">
+    </div>
 
-            <!-- Dynamic Movies -->
+</footer>
 
-        </div>
 
-    </section>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-    <!-- ================= POPULAR ================= -->
-
-    <section class="movies">
-
-        <h2>Popular on Netflix</h2>
-
-        <div class="row" id="popularMovies">
-
-            <!-- Dynamic Movies -->
-
-        </div>
-
-    </section>
-
-    <!-- ================= ACTION ================= -->
-
-    <section class="movies">
-
-        <h2>Action Movies</h2>
-
-        <div class="row" id="actionMovies">
-
-            <!-- Dynamic Movies -->
-
-        </div>
-
-    </section>
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <div class="footer">
-
-            <p>
-
-                © 2026 Netflix Clone | Built using HTML, CSS, JavaScript, Node.js,
-                Express.js & MongoDB
-
-            </p>
-
-        </div>
-
-    </footer>
-
-    <!-- ================= SCRIPT ================= -->
-
-    <script src="netflix.js"></script>
+<script src="netflix.js"></script>
 
 </body>
 

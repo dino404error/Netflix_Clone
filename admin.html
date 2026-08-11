@@ -4,66 +4,406 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Netflix Admin</title>
+    <title>Netflix Admin Dashboard</title>
 
     <link rel="stylesheet" href="admin.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+    <a href="index.html" class="home-btn">
+    <i class="fa-solid fa-house"></i>
+    Netflix Home
+</a>
 
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- ================================
+         NAVBAR
+    ================================= -->
 
-        <h1>Add Movie</h1>
+    <header class="admin-navbar">
 
-        <form id="movieForm">
+        <div class="admin-brand">
+            <span class="netflix-logo">NETFLIX</span>
+            <span class="admin-text">ADMIN</span>
+        </div>
 
-            <input
-                type="text"
-                id="title"
-                placeholder="Movie Title"
-                required>
+        <div class="navbar-actions">
 
-            <textarea
-                id="description"
-                placeholder="Movie Description"
-                required>
-            </textarea>
-
-            <input
-                type="text"
-                id="image"
-                placeholder="Image URL"
-                required>
-
-            <input
-                type="text"
-                id="category"
-                placeholder="Category"
-                required>
-<label>Trailer URL</label>
-
-<input
-type="text"
-id="trailer"
-placeholder="https://www.youtube.com/watch?v=LZKVeYRT7Dk">
-            <button type="submit">
-                
-
-                Add Movie
-
+            <button id="refreshMoviesBtn" class="refresh-btn">
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
             </button>
-            
 
-        </form>
-        <h2>All Movies</h2>
+            <button id="adminLogout" class="logout-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
 
-<div id="movieList"></div>
+        </div>
 
-    </div>
+    </header>
+
+
+    <!-- ================================
+         MAIN
+    ================================= -->
+
+    <main class="admin-container">
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+                <p class="small-heading">NETFLIX CONTENT</p>
+
+                <h1>
+                    Movie Management
+                </h1>
+
+                <p class="page-description">
+                    Add, edit and manage all movies available on your Netflix clone.
+                </p>
+            </div>
+
+            <div class="movie-count-box">
+
+                <span id="movieCount">0</span>
+
+                <p>Total Movies</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             ADD / EDIT FORM
+        ================================= -->
+
+        <section class="admin-form-section">
+
+            <div class="section-title">
+
+                <div>
+                    <p class="small-heading">CONTENT MANAGEMENT</p>
+
+                    <h2 id="formTitle">
+                        <i class="fa-solid fa-plus"></i>
+                        Add New Movie
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <form id="movieForm">
+
+                <input
+                    type="hidden"
+                    id="movieId"
+                >
+
+
+                <!-- BASIC INFORMATION -->
+
+                <div class="form-group-title">
+                    Basic Information
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group full">
+
+                        <label>Movie Title</label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="Enter movie title"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group full">
+
+                        <label>Description</label>
+
+                        <textarea
+                            id="description"
+                            placeholder="Enter movie description"
+                            required
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOVIE DETAILS -->
+
+                <div class="form-group-title">
+                    Movie Details
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label>Category</label>
+
+                        <select id="category" required>
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="Trending">
+                                Trending
+                            </option>
+
+                            <option value="Popular">
+                                Popular
+                            </option>
+
+                            <option value="Action">
+                                Action
+                            </option>
+
+                            <option value="Comedy">
+                                Comedy
+                            </option>
+
+                            <option value="Drama">
+                                Drama
+                            </option>
+
+                            <option value="Horror">
+                                Horror
+                            </option>
+
+                            <option value="Romance">
+                                Romance
+                            </option>
+
+                            <option value="Sci-Fi">
+                                Sci-Fi
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Quality</label>
+
+                        <select id="quality">
+
+                            <option value="HD">
+                                HD
+                            </option>
+
+                            <option value="4K">
+                                4K
+                            </option>
+
+                            <option value="FHD">
+                                FHD
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Release Year</label>
+
+                        <input
+                            type="number"
+                            id="year"
+                            placeholder="2025"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Duration</label>
+
+                        <input
+                            type="text"
+                            id="duration"
+                            placeholder="2h 15m"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Rating</label>
+
+                        <input
+                            type="text"
+                            id="rating"
+                            placeholder="PG-13"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- MEDIA -->
+
+                <div class="form-group-title">
+                    Media
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group full">
+
+                        <label>Poster Image URL</label>
+
+                        <input
+                            type="text"
+                            id="image"
+                            placeholder="https://..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Trailer URL</label>
+
+                        <input
+                            type="text"
+                            id="trailer"
+                            placeholder="Trailer video URL"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Movie Video URL</label>
+
+                        <input
+                            type="text"
+                            id="video"
+                            placeholder="Full movie video URL"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        id="submitMovieBtn"
+                        class="save-btn"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Add Movie
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelEditBtn"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================================
+             MOVIE LIST
+        ================================= -->
+
+        <section class="movies-section">
+
+            <div class="movies-header">
+
+                <div>
+
+                    <p class="small-heading">
+                        LIBRARY
+                    </p>
+
+                    <h2>
+                        All Movies
+                    </h2>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="adminSearch"
+                        placeholder="Search movies..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="movieList"
+                class="movie-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- TOAST -->
+
+    <div
+        id="adminToast"
+        class="admin-toast"
+    ></div>
+
 
     <script src="admin.js"></script>
 
