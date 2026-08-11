@@ -1,34 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Details</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Netflix | Movie</title>
+
+    <link rel="stylesheet" href="css/movie.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+  
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
 
-    <div class="movie-container">
+    <!-- ==========================================
+                    HERO SECTION
+    =========================================== -->
 
-        <img id="movieImage">
+    <section class="hero">
 
-        <div class="movie-info">
+        <!-- Backdrop Image -->
+        <img id="heroBackdrop" class="hero-backdrop" src="" alt="Movie Backdrop">
 
-            <h1 id="movieTitle"></h1>
+        <!-- Trailer Video (Hidden Initially) -->
+        <video id="heroTrailer"
+            class="hero-video"
+            playsinline
+            preload="metadata">
 
-            <p><strong>Category:</strong> <span id="movieCategory"></span></p>
+            <source id="trailerSource" src="" type="video/mp4">
 
-            <p id="movieDescription"></p>
+        </video>
 
-            <button class="play">▶ Play</button>
+        <!-- Dark Overlay -->
+        <div class="hero-overlay"></div>
 
-            <button class="info">+ My List</button>
+        <!-- Top Navigation -->
+        <div class="top-bar">
+
+            <a href="index.html" class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back
+
+            </a>
+
+        </div>
+
+        <!-- Movie Information -->
+        <div class="hero-content">
+
+            <span class="netflix-badge">
+
+                NETFLIX
+
+            </span>
+
+            <h1 id="movieTitle">
+
+                Loading...
+
+            </h1>
+
+            <div class="movie-meta">
+
+               
+
+                <span id="movieYear"></span>
+
+                <span id="movieDuration"></span>
+
+                <span id="movieCategory"></span>
+
+            </div>
+
+            <p id="movieDescription">
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <button id="playMovie" class="play-btn">
+
+                    <i class="fa-solid fa-play"></i>
+
+                    Play
+
+                </button>
+
+                <button id="myList" class="glass-btn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    My List
+
+                </button>
+
+                <button id="likeMovie" class="circle-btn">
+
+                    <i class="fa-solid fa-thumbs-up"></i>
+
+                </button>
+
+                <button id="soundBtn" class="circle-btn">
+
+                    <i class="fa-solid fa-volume-xmark"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+                    ABOUT
+    =========================================== -->
+
+    <section class="about-section">
+
+        <div class="about-left">
+
+            <h2>
+
+                About this movie
+
+            </h2>
+
+            <p id="overview">
+
+            </p>
+
+        </div>
+
+        <div class="about-right">
+
+            <p>
+
+                <strong>Genre :</strong>
+
+                <span id="genre"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Release :</strong>
+
+                <span id="release"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Duration :</strong>
+
+                <span id="duration"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Language :</strong>
+
+                <span id="language">
+
+                    English
+
+                </span>
+
+            </p>
+
+            <p>
+
+                <strong>Cast :</strong>
+
+                <span id="cast">
+
+                    Not Available
+
+                </span>
+
+            </p>
+
+            <p>
+
+                <strong>Director :</strong>
+
+                <span id="director">
+
+                    Not Available
+
+                </span>
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+                MORE LIKE THIS
+    =========================================== -->
+<section class="tabs-section">
+
+    <div class="tabs">
+
+        <button class="tab active"
+        onclick="showTab('about')">
+
+            About
+
+        </button>
+
+        <button class="tab"
+        onclick="showTab('more')">
+
+            More Like This
+
+        </button>
+
+        <button class="tab"
+        onclick="showTab('trailers')">
+
+            Trailers
+
+        </button>
+
+    </div>
+
+    <!-- ABOUT -->
+
+    <div
+    id="aboutTab"
+    class="tab-content active">
+
+        <h2>About this movie</h2>
+
+        <p id="overview"></p>
+
+    </div>
+
+    <!-- MORE LIKE THIS -->
+
+    <div
+    id="moreTab"
+    class="tab-content">
+
+        <div
+        id="recommendedMovies"
+        class="recommend-grid">
 
         </div>
 
     </div>
 
+    <!-- TRAILERS -->
+
+    <div
+    id="trailersTab"
+    class="tab-content">
+
+        <video
+        id="extraTrailer"
+        controls
+        width="100%">
+
+        </video>
+
+    </div>
+
+</section>
+
+    <!-- ==========================================
+                    FOOTER
+    =========================================== -->
+
+    <footer>
+
+        <div class="footer-links">
+
+            <a href="#">FAQ</a>
+
+            <a href="#">Help Center</a>
+
+            <a href="#">Terms of Use</a>
+
+            <a href="#">Privacy</a>
+
+            <a href="#">Contact Us</a>
+
+        </div>
+
+        <p>
+
+            © 2026 Netflix Clone • Developed by Anshu Kumar
+
+        </p>
+
+    </footer>
+
     <script src="movie.js"></script>
 
 </body>
+
 </html>
