@@ -1,7 +1,4 @@
-// ===========================================
-// PROFESSIONAL NETFLIX CLONE
-// netflix.js
-// ===========================================
+
 
 // ===========================================
 // Authentication
@@ -81,102 +78,163 @@ async function initialize() {
 
     await loadMovies();
 
-    await loadContinueWatching();
+
 
     console.log("Netflix Clone Loaded");
 
 }
-
 // ===========================================
-// Load Movies
+// LOAD MOVIES FROM BACKEND
 // ===========================================
 
-async function loadMovies(){
+async function loadMovies() {
 
-    try{
+    try {
 
-        const res =
-        await fetch(
-        "http://localhost:5000/api/movies"
+        console.log("Loading movies from API...");
+
+        const response = await fetch(
+            "http://localhost:5000/api/movies"
         );
 
+        if (!response.ok) {
+            throw new Error(
+                `API Error: ${response.status}`
+            );
+        }
 
-        const movies =
-        await res.json();
+        allMovies = await response.json();
 
+        console.log("Movies loaded:", allMovies);
 
-        console.log("Movies:", movies);
+        // Load hero
+        loadHero();
 
-
-        // Clear sections
-
-        document.getElementById("trendingMovies").innerHTML="";
-        document.getElementById("popularMovies").innerHTML="";
-        document.getElementById("actionMovies").innerHTML="";
-        document.getElementById("newMovies").innerHTML="";
-        document.getElementById("topRatedMovies").innerHTML="";
-
-
-        movies.forEach(movie=>{
-
-
-            const card =
-            createCard(movie);
-
-
-            // Trending
-
-            document
-            .getElementById("trendingMovies")
-            .innerHTML += card;
-
-
-
-            // Popular
-
-            document
-            .getElementById("popularMovies")
-            .innerHTML += card;
-
-
-
-            // Category
-
-            if(movie.category==="Action"){
-
-                document
-                .getElementById("actionMovies")
-                .innerHTML += card;
-
-            }
-
-
-
-            // New releases
-
-            document
-            .getElementById("newMovies")
-            .innerHTML += card;
-
-
-
-            // Top rated
-
-            document
-            .getElementById("topRatedMovies")
-            .innerHTML += card;
-
-
-        });
-
+        // Load all movie sections
+        loadCategories();
 
     }
 
-    catch(error){
+    catch (error) {
 
-        console.log(error);
+        console.error(
+            "Failed to load movies:",
+            error
+        );
 
     }
+
+}
+
+
+// ===========================================
+// LOAD ALL MOVIE CATEGORIES
+// ===========================================
+
+function loadCategories() {
+
+    console.log("Loading movie categories...");
+
+    const top10Container =
+        document.getElementById("top10Movies");
+
+    const trendingContainer =
+        document.getElementById("trendingMovies");
+
+    const popularContainer =
+        document.getElementById("popularMovies");
+
+    const actionContainer =
+        document.getElementById("actionMovies");
+
+
+    // Clear containers
+
+    if (top10Container) {
+        top10Container.innerHTML = "";
+    }
+
+    if (trendingContainer) {
+        trendingContainer.innerHTML = "";
+    }
+
+    if (popularContainer) {
+        popularContainer.innerHTML = "";
+    }
+
+    if (actionContainer) {
+        actionContainer.innerHTML = "";
+    }
+
+
+    // ===================================
+    // TOP 10
+    // ===================================
+
+    if (top10Container) {
+
+        allMovies
+            .slice(0, 10)
+            .forEach((movie, index) => {
+
+                top10Container.innerHTML += `
+
+                    <div class="top10-card">
+
+                        <span class="rank">
+                            ${index + 1}
+                        </span>
+
+                        ${createCard(movie)}
+
+                    </div>
+
+                `;
+
+            });
+
+    }
+
+
+    // ===================================
+    // OTHER CATEGORIES
+    // ===================================
+
+    allMovies.forEach(movie => {
+
+        const card = createCard(movie);
+
+        if (
+            movie.category === "Trending" &&
+            trendingContainer
+        ) {
+
+            trendingContainer.innerHTML += card;
+
+        }
+
+        if (
+            movie.category === "Popular" &&
+            popularContainer
+        ) {
+
+            popularContainer.innerHTML += card;
+
+        }
+
+        if (
+            movie.category === "Action" &&
+            actionContainer
+        ) {
+
+            actionContainer.innerHTML += card;
+
+        }
+
+    });
+
+
+    console.log("Movie categories loaded successfully.");
 
 }
 
@@ -212,6 +270,7 @@ function loadHero() {
         heroMovie.description;
 
 }
+
 
 // ===========================================
 // Hero Buttons
@@ -310,42 +369,7 @@ onclick="addToWishlist('${movie._id}')">
 }
 
 // ===========================================
-// Load Categories
-// ===========================================
 
-function loadCategories(){
-
-    trendingMovies.innerHTML = "";
-
-    popularMovies.innerHTML = "";
-
-    actionMovies.innerHTML = "";
-
-    allMovies.forEach(movie=>{
-
-        const card=createCard(movie);
-
-        if(movie.category==="Trending"){
-
-            trendingMovies.innerHTML+=card;
-
-        }
-
-        else if(movie.category==="Popular"){
-
-            popularMovies.innerHTML+=card;
-
-        }
-
-        else if(movie.category==="Action"){
-
-            actionMovies.innerHTML+=card;
-
-        }
-
-    });
-
-}
 
 // ===========================================
 // Auto Change Hero Every 15 Seconds
@@ -398,7 +422,7 @@ if(bell){
 // ===========================================
 
 const profile =
-document.querySelector(".right img");
+document.querySelector(".right-nav img");
 
 if(profile){
 
@@ -466,7 +490,7 @@ sections.forEach(section=>{
 // Add Movie To My List
 // ===========================================
 
-async function addToList(movieId) {
+async function addToWishList(movieId) {
 
     const userId = localStorage.getItem("userId");
 
