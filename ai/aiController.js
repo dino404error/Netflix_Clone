@@ -188,7 +188,42 @@ try {
     // FALLBACK MATCHING
     // ==========================================
 
-    const userText = message.toLowerCase();
+   // ==========================================
+// MY LIST FALLBACK
+// ==========================================
+
+const userText = message.toLowerCase();
+
+const isMyListRequest =
+    userText.includes("my list") ||
+    userText.includes("mylist") ||
+    userText.includes("from my list") ||
+    userText.includes("in my list");
+
+if (isMyListRequest) {
+
+    console.log("❤️ My List request detected");
+
+    if (favoriteMovies.length === 0) {
+
+        return res.json({
+            success: true,
+            answer: "Your My List is currently empty. Add some movies and I'll help you choose what to watch!",
+            movies: []
+        });
+
+    }
+
+    // Return movies actually present in user's My List
+    const myListMovies = favoriteMovies.slice(0, 4);
+
+    return res.json({
+        success: true,
+        answer: "Here are some movies from your My List that you might enjoy:",
+        movies: myListMovies
+    });
+
+}
 
     let fallbackMovies = movies.filter(movie => {
 
