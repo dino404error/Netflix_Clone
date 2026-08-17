@@ -1757,3 +1757,598 @@ cursor:pointer;
 margin-right:8px;
 
 }
+/* =====================================================
+   FIX FOR CURRENT INDEX.HTML
+===================================================== */
+
+/* NAVBAR */
+.navbar {
+    height: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.navbar .left {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+.navbar .left .logo {
+    width: 145px;
+    height: auto;
+    cursor: pointer;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.navbar nav a:hover {
+    color: #b3b3b3;
+}
+
+.navbar nav a.active {
+    font-weight: 700;
+}
+
+.navbar .right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* SEARCH */
+.navbar .search-box {
+    display: flex;
+    align-items: center;
+    background: #222;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.navbar .search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    width: 150px;
+}
+
+
+/* MOVIE ROW */
+.movie-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 5px 35px;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.movie-row::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* MOVIE CARD */
+.movie-card {
+    position: relative;
+    min-width: 260px;
+    width: 260px;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #222;
+    cursor: pointer;
+    transition: .35s ease;
+    flex-shrink: 0;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* CARD HOVER */
+.movie-card:hover {
+    transform: translateY(-10px) scale(1.08);
+    z-index: 20;
+    box-shadow: 0 15px 40px rgba(0,0,0,.8);
+}
+
+
+/* MOVIE OVERLAY */
+.movie-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px;
+    z-index: 5;
+
+    background: linear-gradient(
+        transparent,
+        rgba(0,0,0,.95)
+    );
+
+    opacity: 0;
+    transition: .3s;
+}
+
+.movie-card:hover .movie-overlay {
+    opacity: 1;
+}
+
+
+/* HERO SIZE */
+.hero {
+    height: 85vh;
+    min-height: 650px;
+}
+
+
+/* HERO CONTENT */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+
+/* MOVIE SECTIONS */
+.movies {
+    position: relative;
+    z-index: 5;
+    padding: 30px 60px;
+}
+
+
+/* SECTION HEADER */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.section-header a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.section-header a:hover {
+    color: white;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .navbar nav {
+        display: none;
+    }
+
+    .navbar .right {
+        gap: 10px;
+    }
+
+    .hero {
+        height: 75vh;
+        min-height: 550px;
+        padding: 0 30px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 42px;
+    }
+
+    .movies {
+        padding: 25px 20px;
+    }
+
+    .movie-card {
+        min-width: 200px;
+        width: 200px;
+        height: 115px;
+    }
+
+    .movie-card img {
+        height: 115px;
+    }
+}
+
+/* =====================================
+   NETFLIX AI
+===================================== */
+
+
+.ai-section {
+    padding: 35px 5% 25px;
+    background: #141414;
+}
+
+.ai-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ai-header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.ai-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(229, 9, 20, 0.15);
+    color: #e50914;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ai-header h2 {
+    font-size: 24px;
+    margin: 8px 0 4px;
+    color: white;
+}
+
+.ai-header p {
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+}
+
+.ai-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    padding: 10px 12px;
+}
+
+#aiInput {
+    flex: 1;
+
+    width: 100%;
+    height: 42px;
+
+    resize: none;
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: white;
+
+    font-size: 14px;
+    font-family: inherit;
+
+    padding: 11px 5px;
+}
+
+#aiInput::placeholder {
+    color: #777;
+}
+
+#aiButton {
+    flex-shrink: 0;
+
+    padding: 11px 16px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #e50914;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#aiButton:hover {
+    background: #f40612;
+}
+
+#aiButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* Loading */
+
+.ai-loading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 20px;
+
+    color: #999;
+
+    font-size: 13px;
+}
+
+.ai-spinner {
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid #444;
+    border-top-color: #e50914;
+
+    border-radius: 50%;
+
+    animation: aiSpin 0.8s linear infinite;
+}
+
+@keyframes aiSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Results */
+
+.ai-result {
+    margin-top: 25px;
+}
+
+.ai-result h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.ai-movies {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(160px, 1fr)
+    );
+
+    gap: 15px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================
+   NETFLIX AI
+========================================== */
+
+.ai-response-box {
+    width: 100%;
+    margin-top: 20px;
+    padding: 22px;
+    background: #181818;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.ai-response-header h3 {
+    margin: 0 0 10px;
+    color: #e50914;
+    font-size: 22px;
+}
+
+.ai-response-header p {
+    margin: 0;
+    color: #ddd;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.ai-recommend-title {
+    color: white;
+    margin: 25px 0 15px;
+    font-size: 18px;
+}
+
+.ai-movie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.ai-movie-card {
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.25s ease;
+}
+
+.ai-movie-card:hover {
+    transform: scale(1.04);
+}
+
+.ai-movie-image {
+    width: 100%;
+    height: 270px;
+    overflow: hidden;
+}
+
+.ai-movie-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ai-movie-info {
+    padding: 14px;
+}
+
+.ai-movie-info h3 {
+    color: white;
+    margin: 0 0 7px;
+    font-size: 17px;
+}
+
+.ai-movie-meta {
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.ai-movie-info p {
+    color: #bbb;
+    font-size: 13px;
+    line-height: 1.5;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ai-watch-btn {
+    width: 100%;
+    border: none;
+    background: #e50914;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.ai-watch-btn:hover {
+    background: #f40612;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+
+    .ai-movie-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .ai-movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .ai-movie-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+.ai-chat-box {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    background: #141414;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ai-messages {
+    padding: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.ai-message {
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+.ai-bot {
+    background: #222;
+    color: #fff;
+}
+
+.ai-user {
+    background: #e50914;
+    color: #fff;
+    margin-left: auto;
+}
+
+.ai-input-area {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #333;
+    gap: 10px;
+}
+
+#aiChatInput {
+    flex: 1;
+    background: #222;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+#aiSendButton {
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#aiSendButton:hover {
+    background: #f40612;
+}
