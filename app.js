@@ -8,17 +8,42 @@ const connectDB = require("./config/db");
 
 const app = express();
 
+// ==============================
+// Connect MongoDB
+// ==============================
+
 connectDB();
+
+// ==============================
+// Middlewares
+// ==============================
 
 app.use(cors());
 app.use(express.json());
 
+// ==============================
+// Routes
+// ==============================
 
-app.use("/api/auth", require("./routes/authRoutes.js"));
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/movies", require("./routes/movieRoutes"));
 app.use("/api/favorites", require("./routes/favoriteRoutes"));
-app.use("/api/movies", require("./routes/movieRoutes.js"));
+app.use("/api/continue", require("./routes/continueRoutes"));
+app.use("/api/ai", require("./routes/aiRoutes"));
+// ==============================
+// Default Route
+// ==============================
 
+app.get("/", (req, res) => {
+    res.send("Netflix Clone Backend Running 🚀");
+});
 
-app.listen(5000,()=>{
-    console.log("Server running on port 5000");
+// ==============================
+// Start Server
+// ==============================
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
